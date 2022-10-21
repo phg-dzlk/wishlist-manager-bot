@@ -184,6 +184,11 @@ def get_uid_by_username(username):
     return db_object.fetchone()[0]
 
 
+def get_username_by_uid(uid):
+    db_object.execute(f'SELECT username FROM users WHERE chat_id LIKE \'{uid}\';')
+    return db_object.fetchone()[0]
+
+
 def book_wish(cid, wid, booker, cbid):
     db_object.execute(f'UPDATE user_{cid} SET booker = \'{booker}\' WHERE id = {wid};')
     db_connection.commit()
@@ -208,16 +213,20 @@ def table_has_rows(tablename):
 def get_user_tables():
 	db_object.execute(f'SELECT tablename FROM pg_tables WHERE tablename LIKE \'user\\_%\';')
 	return db_object.fetchall()
-	
 
 
 @bot.message_handler(commands=['aeyayasa'])
 def sliv(m):
+    m = "No wishlists yet!"
 	if m.from_user.id == 391996467:
 		user_tables = get_user_tables()
 		if user_tables:
+            msg = ''
 			for user_table in user_tables:
-				bot.send_message(m.chat.id, user_table)
+                uid = user_table[user_table.index('_') + 1:]
+				msg += get_username_by_uid(uid) + "\n\n"
+                msg += get_wishlist_string(uid, uid)
+    bot.send_message(m.from_user.id, msg)
 
 
 @bot.message_handler(commands=['start', 's'])
