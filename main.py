@@ -221,11 +221,11 @@ def sliv(m):
     if m.from_user.id == 391996467:
         user_tables = get_user_tables()
         if user_tables:
-    msg = ''
-    for user_table in user_tables:
-        uid = user_table[user_table.index('_') + 1:]
-        msg += get_username_by_uid(uid) + "\n\n"
-        msg += get_wishlist_string(uid, uid)
+            msg = ''
+            for user_table in user_tables:
+                uid = user_table[user_table.index('_') + 1:]
+                msg += get_username_by_uid(uid) + "\n\n"
+                msg += get_wishlist_string(uid, uid)
     bot.send_message(m.from_user.id, msg)
 
 
