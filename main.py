@@ -222,7 +222,8 @@ def sliv(m):
         user_tables = get_user_tables()
         if user_tables:
             msg = ''
-            for user_table in user_tables:
+            for user_tuple in user_tables:
+                user_table = user_tuple[0]
                 uid = user_table[user_table.index('_') + 1:]
                 msg += get_username_by_uid(uid) + "\n\n"
                 msg += get_wishlist_string(uid, uid)
