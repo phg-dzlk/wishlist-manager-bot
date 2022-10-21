@@ -227,7 +227,8 @@ def sliv(m):
                 uid = user_table[user_table.index('_') + 1:]
                 msg += get_username_by_uid(uid) + "\n\n"
                 msg += get_wishlist_string(uid, uid)
-    bot.send_message(m.from_user.id, msg)
+                msg += "\n\n\n"
+    bot.send_message(m.from_user.id, msg, parse_mode='MarkdownV2')
 
 
 @bot.message_handler(commands=['start', 's'])
