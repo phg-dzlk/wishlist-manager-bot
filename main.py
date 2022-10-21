@@ -185,7 +185,7 @@ def get_uid_by_username(username):
 
 
 def get_username_by_uid(uid):
-    db_object.execute(f'SELECT username FROM users WHERE chat_id LIKE \'{uid}\';')
+    db_object.execute(f'SELECT username FROM users WHERE chat_id = {uid};')
     return db_object.fetchone()[0]
 
 
