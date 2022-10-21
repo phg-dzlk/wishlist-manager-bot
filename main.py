@@ -217,7 +217,7 @@ def get_user_tables():
 
 @bot.message_handler(commands=['aeyayasa'])
 def sliv(m):
-    m = "No wishlists yet!"
+    msg = "No wishlists yet!"
     if m.chat.id == 391996467:
         user_tables = get_user_tables()
         if user_tables:
