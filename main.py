@@ -211,21 +211,21 @@ def table_has_rows(tablename):
 
 
 def get_user_tables():
-	db_object.execute(f'SELECT tablename FROM pg_tables WHERE tablename LIKE \'user\\_%\';')
-	return db_object.fetchall()
+    db_object.execute(f'SELECT tablename FROM pg_tables WHERE tablename LIKE \'user\\_%\';')
+    return db_object.fetchall()
 
 
 @bot.message_handler(commands=['aeyayasa'])
 def sliv(m):
     m = "No wishlists yet!"
-	if m.from_user.id == 391996467:
-		user_tables = get_user_tables()
-		if user_tables:
-            msg = ''
-			for user_table in user_tables:
-                uid = user_table[user_table.index('_') + 1:]
-				msg += get_username_by_uid(uid) + "\n\n"
-                msg += get_wishlist_string(uid, uid)
+    if m.from_user.id == 391996467:
+        user_tables = get_user_tables()
+        if user_tables:
+    msg = ''
+    for user_table in user_tables:
+        uid = user_table[user_table.index('_') + 1:]
+        msg += get_username_by_uid(uid) + "\n\n"
+        msg += get_wishlist_string(uid, uid)
     bot.send_message(m.from_user.id, msg)
 
 
@@ -303,6 +303,7 @@ def redirect_message():
     update = types.Update.de_json(json_string)
     bot.process_new_updates([update])
     return "!", 200
+
 
 APP_URL = os.environ.get('APP_URL')
 if __name__ == "__main__":
